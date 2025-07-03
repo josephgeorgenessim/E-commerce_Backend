@@ -5,6 +5,7 @@ const categorySchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, 'Category required'],
+        trim: true,
         unique: [true, 'Category must be unique'],
         minlength: [3, 'Too Short Category Name'],
         maxlength: [32, 'Too Long Category Name'],
@@ -14,7 +15,7 @@ const categorySchema = new mongoose.Schema({
         type: String,
         lowercase: true
     },
-    image: String , 
+    image: String,
 
 }, { timestamps: true })
 // create model

@@ -31,9 +31,40 @@ const productSchema = new mongoose.Schema({
     price: {
         type: Number,
         required: [true, 'price product required'],
-        trim: true
+        trim: true,
+        maxlength: [20, "Too Long product price"]
     },
-    image: String,
+    priceAfterDiscount: {
+        type: Number
+    },
+    color: [String],
+    imageCover: {
+        type: String,
+        required: [true, "Product image cover is required "]
+    },
+    image: [String],
+    category: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Category',
+        required: [true, 'Product must be belong to category  ']
+    },
+    subCategory: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'subCategory',
+    },
+    brand: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Brand',
+    },
+    ratingsAverage: {
+        type: Number,
+        min: [1, 'Rating must be above 1'],
+        max: [5, 'Rating must be below 5'],
+    },
+    ratingsQuantity: {
+        type: Number,
+        default: 0
+    }
 
 }, { timestamps: true })
 // create model

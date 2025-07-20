@@ -6,9 +6,8 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: [true, 'title product required'],
         trim: true,
-        unique: [true, 'product must be unique'],
         minlength: [3, 'Too Short product title'],
-        maxlength: [32, 'Too Long product title'],
+        maxlength: [100, 'Too Long product title'],
     },
     slug: {
         type: String,
@@ -32,7 +31,7 @@ const productSchema = new mongoose.Schema({
         type: Number,
         required: [true, 'price product required'],
         trim: true,
-        maxlength: [20, "Too Long product price"]
+        maxlength: [200000, "Too Long product price"]
     },
     priceAfterDiscount: {
         type: Number
@@ -49,7 +48,7 @@ const productSchema = new mongoose.Schema({
         required: [true, 'Product must be belong to category  ']
     },
     subCategory: {
-        type: mongoose.Schema.ObjectId,
+        type: [mongoose.Schema.ObjectId],
         ref: 'subCategory',
     },
     brand: {
@@ -67,6 +66,17 @@ const productSchema = new mongoose.Schema({
     }
 
 }, { timestamps: true })
+
+// mongoose query middleware 
+productSchema.pre(/^find/, function (next) {
+    this.populate({
+        path: 'category',
+        select: 'name -_id'
+    });
+
+    next();
+})
+
 // create model
 const ProductModel = mongoose.model('Product', productSchema)
 

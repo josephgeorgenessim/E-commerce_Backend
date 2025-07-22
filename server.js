@@ -8,6 +8,7 @@ const brandsRoute = require('./routes/brandRoutes');
 const productsRoute = require('./routes/productsRoutes.js');
 const globalError = require('./middleware/errorMiddleware');
 const ApiError = require('./utils/apiError');
+const path = require('path');
 
 // Load environment variables
 dotenv.config({ path: 'config.env' });
@@ -17,6 +18,7 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'uploads')));
 
 
 // Logger
@@ -59,7 +61,7 @@ const startServer = async () => {
 
     } catch (err) {
         console.error('❌ Failed to connect to DB:', err);
-        process.exit(1); 
+        process.exit(1);
     }
 };
 

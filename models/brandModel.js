@@ -18,6 +18,14 @@ const brandSchema = new mongoose.Schema({
     image: String,
 
 }, { timestamps: true })
+
+brandSchema.post('init', (doc) => {
+    if (doc.image) {
+        doc.image = `${process.env.BASE_URL}/brands/${doc.image}`
+    }
+})
+
+
 // create model
 const BrandModel = mongoose.model('Brand', brandSchema)
 

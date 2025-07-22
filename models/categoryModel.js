@@ -18,6 +18,13 @@ const categorySchema = new mongoose.Schema({
     image: String,
 
 }, { timestamps: true })
+
+categorySchema.post('init', (doc) => {
+    if (doc.image) {
+        doc.image = `${process.env.BASE_URL}/categories/${doc.image}`
+    }
+})
+
 // create model
 const CategoryModel = mongoose.model('Category', categorySchema)
 

@@ -33,7 +33,8 @@ const userSchema = new mongoose.Schema({
     active: {
         type: Boolean,
         default: true,
-    }
+    },
+    passwordChangedAt: Date,
 
 }, { timestamps: true })
 

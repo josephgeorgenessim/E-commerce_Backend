@@ -41,7 +41,7 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: [true, "Product image cover is required "]
     },
-    image: [String],
+    images: [String],
     category: {
         type: mongoose.Schema.ObjectId,
         ref: 'Category',
@@ -75,6 +75,20 @@ productSchema.pre(/^find/, function (next) {
     });
 
     next();
+})
+
+// post middleware to add base url to images and imageCover
+productSchema.post('init', (doc) => {
+    if (doc.imageCover) {
+        doc.imageCover = `${process.env.BASE_URL}/products/${doc.imageCover}`
+    }
+    if (doc.images) {
+        const imagesArray = []
+        doc.images.forEach(img => {
+            imagesArray.push(`${process.env.BASE_URL}/products/${img}`)
+        })
+        doc.images = imagesArray
+    }
 })
 
 // create model

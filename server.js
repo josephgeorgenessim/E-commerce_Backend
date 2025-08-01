@@ -6,6 +6,7 @@ const categoryRoute = require('./routes/categoryRoutes');
 const subCategoryRoute = require('./routes/subCategoryRoutes');
 const brandsRoute = require('./routes/brandRoutes');
 const productsRoute = require('./routes/productsRoutes.js');
+const userRoute = require('./routes/userRoutes.js');
 const globalError = require('./middleware/errorMiddleware');
 const ApiError = require('./utils/apiError');
 const path = require('path');
@@ -31,6 +32,7 @@ app.use('/api/v1/categories', categoryRoute);
 app.use('/api/v1/subcategories', subCategoryRoute);
 app.use('/api/v1/brands', brandsRoute);
 app.use('/api/v1/products', productsRoute);
+app.use('/api/v1/users', userRoute);
 
 // Handle undefined routes
 app.use((req, res, next) => {

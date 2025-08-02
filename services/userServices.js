@@ -9,10 +9,9 @@ const sharp = require('sharp');
 const bcrypt = require('bcrypt')
 
 
-
-
 //  upload single image 
 exports.uploadUserImage = uploadSingleImage('profileImage')
+
 
 // Resize image processing
 exports.resizeImage = asyncHandler(async (req, res, next) => {
@@ -38,6 +37,7 @@ exports.resizeImage = asyncHandler(async (req, res, next) => {
 // @access  private
 exports.getUsers = factory.getAll(User, "User")
 
+
 // @desc    Get specific User
 // @route   GET /api/v1/Users/:id
 // @access  private
@@ -53,7 +53,6 @@ exports.createUser = factory.create(User, "User")
 // @desc    Update specific User
 // @route   PUT /api/v1/Users/:id
 // @access  private
-
 exports.updateUser = asyncHandler(async (req, res, next) => {
     const document = await User.findOneAndUpdate(
         { _id: req.params.id },
@@ -73,6 +72,7 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
         User: document,
     })
 })
+
 
 // @desc    Change User Password
 // @route   PUT /api/v1/Users/changePassword/:id
@@ -94,6 +94,7 @@ exports.changeUserPassword = asyncHandler(async (req, res, next) => {
         User: document,
     })
 })
+
 
 // @desc    Delete specific User
 // @route   DELETE /api/v1/Users/:id

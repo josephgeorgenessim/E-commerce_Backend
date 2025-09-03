@@ -10,6 +10,7 @@ const userRoute = require('./routes/userRoutes.js');
 const authRoute = require('./routes/authRoutes.js');
 const reviewRoute = require('./routes/reviewRoutes.js');
 const wishlistRoute = require('./routes/wishlistRoutes.js');
+const addressesUserRoute = require('./routes/addressesUserRoutes.js');
 const globalError = require('./middleware/errorMiddleware');
 const ApiError = require('./utils/apiError');
 const path = require('path');
@@ -39,7 +40,7 @@ app.use('/api/v1/users', userRoute);
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/reviews', reviewRoute);
 app.use('/api/v1/wishlist', wishlistRoute);
-
+app.use('/api/v1/addresses', addressesUserRoute);
 // Handle undefined routes
 app.use((req, res, next) => {
     next(new ApiError(`can't find this route: ${req.originalUrl}`, 400))

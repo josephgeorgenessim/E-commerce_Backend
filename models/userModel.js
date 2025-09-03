@@ -38,6 +38,11 @@ const userSchema = new mongoose.Schema({
         default: true,
     },
     passwordChangedAt: Date,
+    // child reference
+    wishlist: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product'
+    }],
 
 }, { timestamps: true })
 

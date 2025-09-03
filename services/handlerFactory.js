@@ -10,6 +10,8 @@ exports.deleteOne = (model) =>
         if (!document) {
             return next(new ApiError(`no document for this id ${id}`, 404))
         }
+
+
         res.status(200).json({
             msg: `Deleted `
         })
@@ -25,6 +27,8 @@ exports.updateOne = (model, name) =>
         if (!document) {
             return next(new ApiError(`no ${name} document for this id ${req.params.id}`, 404))
         }
+        // trigger save middleware
+        await document.save()
         res.status(200).json({
             [name]: document,
         })
@@ -39,9 +43,13 @@ exports.create = (model, name) => asyncHandler(async (req, res, next) => {
 })
 
 
-exports.getOne = (model, name) => asyncHandler(async (req, res, next) => {
+exports.getOne = (model, name, populateOption) => asyncHandler(async (req, res, next) => {
 
-    const document = await model.findById(req.params.id)
+    let query = model.findById(req.params.id)
+    if (populateOption) {
+        query = query.populate(populateOption)
+    }
+    const document = await query
     if (!document) {
         return next(new ApiError(`no ${name} for this id ${req.params.id}`, 404))
     }

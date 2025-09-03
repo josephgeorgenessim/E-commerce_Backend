@@ -68,7 +68,7 @@ exports.getProducts = factory.getAll(Products, "Products")
 // @desc    Get specific Product
 // @route   GET /api/v1/products/:id
 // @access  public
-exports.getProduct = factory.getOne(Products, "Products")
+exports.getProduct = factory.getOne(Products, "Products", "reviews")
 
 
 // @desc    Create product

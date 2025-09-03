@@ -65,7 +65,13 @@ const productSchema = new mongoose.Schema({
         default: 0
     }
 
-}, { timestamps: true })
+}, { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } })
+
+productSchema.virtual('reviews', {
+    ref: 'Review',
+    localField: '_id',
+    foreignField: 'product'
+})
 
 // mongoose query middleware 
 productSchema.pre(/^find/, function (next) {

@@ -8,6 +8,7 @@ const brandsRoute = require('./routes/brandRoutes');
 const productsRoute = require('./routes/productsRoutes.js');
 const userRoute = require('./routes/userRoutes.js');
 const authRoute = require('./routes/authRoutes.js');
+const reviewRoute = require('./routes/reviewRoutes.js');
 const globalError = require('./middleware/errorMiddleware');
 const ApiError = require('./utils/apiError');
 const path = require('path');
@@ -35,6 +36,7 @@ app.use('/api/v1/brands', brandsRoute);
 app.use('/api/v1/products', productsRoute);
 app.use('/api/v1/users', userRoute);
 app.use('/api/v1/auth', authRoute);
+app.use('/api/v1/reviews', reviewRoute);
 
 // Handle undefined routes
 app.use((req, res, next) => {

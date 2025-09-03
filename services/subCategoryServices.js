@@ -6,7 +6,7 @@ const ApiFeatures = require("../utils/apiFeatures");
 const factory = require('./handlerFactory');
 
 
-
+// nested route
 // @desc    Get List of subcategories
 // @route   GET /api/v1/subcategories
 // @access  public
@@ -21,14 +21,17 @@ exports.SetCategoryIdFromParams = (req, res, next) => {
 
 exports.getSubCategories = factory.getAll(subCategoryModel, "subCategory")
 
-// @desc    Create subCategory
-// @route   POST /api/v1/subcategories
-// @access  private
+
+// nested route
 exports.setCategoryIdFromParamsToBody = (req, res, next) => {
     // Nested route
     if (!req.body.category) req.body.category = req.params.categoryId
     next()
 }
+
+// @desc    Create subCategory
+// @route   POST /api/v1/subcategories
+// @access  private
 exports.createSubCategory = factory.create(subCategoryModel, "subCategory")
 
 

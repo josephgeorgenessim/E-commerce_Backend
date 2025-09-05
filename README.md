@@ -136,7 +136,7 @@ E-commerce_Backend/
 
 ## 📚 API Documentation
 
-For detailed API documentation, please refer to the [API Documentation](API_DOCS.md) (to be added).
+For detailed API documentation, please refer to the [API Documentation](API_DOCS.md).
 
 ## 🔒 Security
 

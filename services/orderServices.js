@@ -6,7 +6,7 @@ const OrderModel = require('../models/orderModel');
 const CartModel = require('../models/cartModel');
 const ProductModel = require('../models/productModel');
 const factory = require('./handlerFactory');
-const Stripe = require('stripe')(`sk_test_51S430APUagKYlCuaykJa7eXzED8zVlavXlNIR1yMv70Xy6QS7jp4fZuvaLnArk3J5DVmkdWD4WTyfVoMlbVrWrUJ003WeeoZmo`);
+const Stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`);
 
 
 

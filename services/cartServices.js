@@ -52,7 +52,8 @@ exports.addProductToCart = asyncHandler(async (req, res, next) => {
                 {
                     product: productId,
                     color: color,
-                    price: product.price
+                    price: product.price,
+                    totalCartPrice: product.price * product.quantity
                 }
             ]
         })
@@ -76,7 +77,8 @@ exports.addProductToCart = asyncHandler(async (req, res, next) => {
             product: productId,
             color: color,
             price: product.price,
-            quantity: 1
+            quantity: 1,
+            totalCartPrice: product.price * product.quantity
         })
     }
 

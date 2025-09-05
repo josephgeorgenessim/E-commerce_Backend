@@ -13,6 +13,8 @@
   "dependencies": {
     "bcrypt": "^6.0.0",
     "colors": "^1.4.0",
+    "compression": "^1.8.1",
+    "cors": "^2.8.5",
     "dotenv": "^17.0.0",
     "express": "^5.1.0",
     "express-async-handler": "^1.2.0",
@@ -23,7 +25,8 @@
     "multer": "^2.0.2",
     "nodemailer": "^7.0.5",
     "sharp": "^0.34.3",
-    "slugify": "^1.6.6"
+    "slugify": "^1.6.6",
+    "stripe": "^18.5.0"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",

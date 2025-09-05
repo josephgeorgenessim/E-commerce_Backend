@@ -6,16 +6,22 @@ const globalError = require('./middleware/errorMiddleware');
 const ApiError = require('./utils/apiError');
 const path = require('path');
 const mountRoutes = require('./routes');
+const cors = require('cors')
+const compression = require('compression');
+const { webhookCheckout } = require('./services/orderServices');
 // Load environment variables
 dotenv.config({ path: 'config.env' });
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-
 // Middleware
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'uploads')));
+app.use(cors())
+app.use(compression())
 
+// webhooks
+app.post('/webhook-checkout', express.raw({ type: 'application/json' }), webhookCheckout)
 
 // Logger
 if (process.env.NODE_ENV === 'development') {

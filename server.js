@@ -9,6 +9,10 @@ const mountRoutes = require('./routes');
 const cors = require('cors')
 const compression = require('compression');
 const { webhookCheckout } = require('./services/orderServices');
+const hpp = require('hpp');
+const mongoSanitize = require('express-mongo-sanitize');
+const { xss } = require('express-xss-sanitizer');
+
 // Load environment variables
 dotenv.config({ path: 'config.env' });
 
@@ -19,6 +23,15 @@ app.use(express.json({ limit: '20kb' }));
 app.use(express.static(path.join(__dirname, 'uploads')));
 app.use(cors())
 app.use(compression())
+
+// middleware to sanitize data
+app.use(mongoSanitize())
+
+// middleware for xss
+app.use(xss())
+
+// middleware to protect against HTTP Parameter Pollution attacks
+app.use(hpp({ whitelist: ['price', 'sold', 'quantity', 'ratingsAverage', 'ratingsQuantity'] }))
 
 // webhooks
 app.post('/webhook-checkout', express.raw({ type: 'application/json' }), webhookCheckout)
